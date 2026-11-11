@@ -1,0 +1,20 @@
+-6.76	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+-4.76	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+-2.76	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+-0.76	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+1.24	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+3.74	rx: 692 pkt/s 9.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 280 us | clock (collecting) | queue-drops stage 0 stats 0
+5.24	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 279 us | clock -1.07 ppm (lsq -1.56) p99 58 us | queue-drops stage 0 stats 0
+7.24	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 281 us | clock -1.07 ppm (lsq -1.18) p99 61 us | queue-drops stage 0 stats 0
+9.24	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 278 us | clock -1.32 ppm (lsq -1.30) p99 60 us | queue-drops stage 0 stats 0
+11.24	rx: 753 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 278 us | clock -1.32 ppm (lsq -1.34) p99 58 us | queue-drops stage 0 stats 0
+13.24	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 278 us | clock -1.32 ppm (lsq -1.39) p99 58 us | queue-drops stage 0 stats 0
+14.99	rx: 452 pkt/s 6.5 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 278 us | clock -0.94 ppm (lsq -1.34) p99 60 us | queue-drops stage 0 stats 0
+17.24	rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 278 us | clock -1.00 ppm (lsq -1.32) p99 59 us | queue-drops stage 0 stats 0
+19.24	rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 277 us | clock -1.01 ppm (lsq -1.21) p99 59 us | queue-drops stage 0 stats 0
+21.24	rx: 754 pkt/s 10.5 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 277 us | clock -1.08 ppm (lsq -1.20) p99 59 us | queue-drops stage 0 stats 0
+23.24	rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 277 us | clock -1.08 ppm (lsq -1.19) p99 59 us | queue-drops stage 0 stats 0
+25.25	rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 277 us | clock -1.08 ppm (lsq -1.18) p99 59 us | queue-drops stage 0 stats 0
+27.25	rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -1.08 ppm (lsq -1.20) p99 59 us | queue-drops stage 0 stats 0
+29.24	rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -1.08 ppm (lsq -1.20) p99 59 us | queue-drops stage 0 stats 0
+31.49	rx: 122 pkt/s 1.7 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -1.08 ppm (lsq -1.20) p99 59 us | queue-drops stage 0 stats 0

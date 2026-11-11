@@ -1,0 +1,14 @@
+[package]
+name = "vlp16"
+description = "Velodyne VLP-16 패킷 해석과 프레임 조립 (소켓도 파일도 모르는 순수 계산)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+lidar-core.workspace = true
+
+[dev-dependencies]
+# 테스트와 예제에서만 pcap 파일을 읽는다. 라이브러리 본체는 입력 출처를 모른다.
+lidar-io.workspace = true

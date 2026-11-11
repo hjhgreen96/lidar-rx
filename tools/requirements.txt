@@ -1,0 +1,2 @@
+velodyne_decoder==3.1.0
+numpy

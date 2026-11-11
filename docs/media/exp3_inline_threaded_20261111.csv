@@ -1,0 +1,10 @@
+mode,queue,work_ms,received_packets,missing_packets,kernel_drops,socket_wait_p99_us,work_frames,work_complete_frames,work_queue_drops,work_age_p99_us
+inline,-,0,7093,0,0,60,96,94,0,1408
+inline,-,50,7093,0,0,48640,96,94,0,1408
+inline,-,90,7093,0,0,88064,96,94,0,1392
+inline,-,150,1725,5208,5208,720896,67,1,0,712704
+threaded,4,0,7093,0,0,54,96,94,0,1504
+threaded,4,50,7093,0,0,53,96,94,0,1520
+threaded,4,90,7093,0,0,51,96,94,0,1536
+threaded,4,150,7093,0,0,51,68,66,28,557056
+threaded,1,150,7093,0,0,49,65,63,31,149504

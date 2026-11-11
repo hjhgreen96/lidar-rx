@@ -1,0 +1,33 @@
+# pcap-replay (Windows)
+pcap-replay: 7093 packets/loop, 9.41 s/loop, pace Sensor { drift_ppm: 0.0 }, speed 1, loops 3, to 192.168.2.99:2368
+pcap-replay: gap: nothing sent from 12.000 s for 0.800 s
+pcap-replay: echo: listening on 0.0.0.0:2369, relaying to 172.28.135.171:2369
+pcap-replay: sent 20676 packets in 28.239 s (planned 28.239 s), skipped 603 in the gap; lateness p50 0 us, p99 0 us, max 330 us, >100 us: 26
+pcap-replay: echo: 20676 of 20676 came back (0 unknown); round trip p50 386 us, p99 13472 us, max 18629 us
+# lidar-rx --ros2 (WSL)
+lidar-rx: listening on 0.0.0.0:2369, socket receive buffer 212992 B (requested None)
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0 ros2 0
+rx: 417 pkt/s 6.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 89 us | clock (collecting) | queue-drops stage 0 stats 0 ros2 0
+rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 76 us | clock +5.86 ppm (lsq -17.69) p99 13073 us | queue-drops stage 0 stats 0 ros2 0
+rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 76 us | clock +1.44 ppm (lsq +179.78) p99 13511 us | queue-drops stage 0 stats 0 ros2 0
+rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +1.44 ppm (lsq -99.12) p99 13023 us | queue-drops stage 0 stats 0 ros2 0
+rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +10.04 ppm (lsq -132.10) p99 12772 us | queue-drops stage 0 stats 0 ros2 0
+rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 73 us | clock +10.04 ppm (lsq -54.35) p99 12863 us | queue-drops stage 0 stats 0 ros2 0
+rx: 451 pkt/s 6.5 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 74 us | clock +9.88 ppm (lsq -11.63) p99 12911 us | queue-drops stage 0 stats 0 ros2 0
+rx: 755 pkt/s 10.5 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 74 us | clock +7.82 ppm (lsq +70.49) p99 13259 us | queue-drops stage 0 stats 0 ros2 0
+rx: 753 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 73 us | clock +7.82 ppm (lsq +54.46) p99 13287 us | queue-drops stage 0 stats 0 ros2 0
+rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 73 us | clock +7.82 ppm (lsq +16.66) p99 13206 us | queue-drops stage 0 stats 0 ros2 0
+rx: 753 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 73 us | clock +7.82 ppm (lsq -5.34) p99 13088 us | queue-drops stage 0 stats 0 ros2 0
+rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 73 us | clock +7.82 ppm (lsq +0.42) p99 13172 us | queue-drops stage 0 stats 0 ros2 0
+rx: 754 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 73 us | clock +7.82 ppm (lsq +11.47) p99 13206 us | queue-drops stage 0 stats 0 ros2 0
+rx: 753 pkt/s 10.0 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +8.61) p99 13203 us | queue-drops stage 0 stats 0 ros2 0
+rx: 398 pkt/s 5.7 frm/s | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +2.95) p99 13169 us | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +2.95) p99 13169 us | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +2.95) p99 13169 us | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +2.95) p99 13169 us | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +2.95) p99 13169 us | queue-drops stage 0 stats 0 ros2 0
+rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 603 reorder 0 restart 0 kernel-drops 0 wait-p99 72 us | clock +7.50 ppm (lsq +2.95) p99 13169 us | queue-drops stage 0 stats 0 ros2 0

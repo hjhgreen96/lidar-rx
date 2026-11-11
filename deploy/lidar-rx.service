@@ -1,0 +1,32 @@
+# 수신 서비스: UDP 수신 → VLP-16 해석 → 시계 추정 → ROS 2 발행 (docs/modules/deploy.md)
+[Unit]
+Description=lidar-rx: VLP-16 LiDAR receiver
+# 순서를 따로 쓰지 않는다: 커널 모듈(lidar_mon)은 systemd-modules-load.service가 sysinit.target 전에 올리고,
+# 이 서비스는 기본 의존성으로 sysinit.target 뒤에 시작한다. Requires=도 쓰지 않는다: 모듈은 관찰용이라 없어도
+# 수신은 돌아야 한다. network-online.target도 기다리지 않는다: 0.0.0.0에 바인드하면 링크가 오기 전에도 소켓을 연다.
+# 재시작 한도: 30초 안에 10번 시작하면 멈추고 실패 상태로 둔다 (곧바로 다시 죽는 문제는 재시작해도 안 풀림)
+StartLimitIntervalSec=30
+StartLimitBurst=10
+
+[Service]
+# READY=1을 보내야 "시작됨" - 소켓·버퍼·소비자 스레드·수신 스레드 설정까지 끝난 뒤에 보낸다
+Type=notify
+User=lidar
+EnvironmentFile=/etc/lidar-rx/lidar-rx.env
+EnvironmentFile=-/etc/lidar-rx/ros2.env
+ExecStart=/usr/local/bin/lidar-rx $LIDAR_RX_ARGS
+# 수신 루프가 2초 안에 WATCHDOG=1을 못 보내면 멈춘 것으로 보고 SIGABRT → 재시작.
+# 센서가 조용한 것은 멈춘 것이 아니다: 루프는 0.5초 타임아웃마다 돌며 신호를 보내고, 상태에 "sensor quiet"를 띄운다.
+WatchdogSec=2s
+Restart=on-failure
+RestartSec=500ms
+# SIGTERM을 받으면 요약을 남기고 끝난다. 5초 안에 안 끝나면 SIGKILL
+TimeoutStopSec=5s
+# 수신 스레드 하나만 코드에서 SCHED_FIFO로 올린다 (--rt-prio). root가 아니므로 그 우선순위까지 허락만 준다.
+# CPUAffinity=·Nice=는 쓰지 않는다: 프로세스의 모든 스레드(소비자, ROS 2/DDS)에 걸리므로 스레드 단위로 코드에서 한다.
+LimitRTPRIO=50
+# --lock-memory(mlockall)가 프로세스 메모리 전체를 RAM에 고정할 수 있게. 기본 한도(8 MB)는 스레드 스택만으로도 찰 수 있음
+LimitMEMLOCK=64M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+inline - 0: rx_frames 7100 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7110 softnet_processed 7100 softnet_dropped 0 softnet_squeeze 0
+inline - 50: rx_frames 7102 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7107 softnet_processed 7102 softnet_dropped 0 softnet_squeeze 0
+inline - 90: rx_frames 7102 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7111 softnet_processed 7262 softnet_dropped 0 softnet_squeeze 0
+inline - 150: rx_frames 7099 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7092 softnet_processed 7099 softnet_dropped 0 softnet_squeeze 0
+threaded 4 0: rx_frames 7099 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7106 softnet_processed 7259 softnet_dropped 0 softnet_squeeze 0
+threaded 4 50: rx_frames 7098 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7104 softnet_processed 7098 softnet_dropped 0 softnet_squeeze 0
+threaded 4 90: rx_frames 7098 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7106 softnet_processed 7098 softnet_dropped 0 softnet_squeeze 0
+threaded 4 150: rx_frames 7100 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7106 softnet_processed 7260 softnet_dropped 0 softnet_squeeze 0
+threaded 1 150: rx_frames 7105 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7127 softnet_processed 7105 softnet_dropped 0 softnet_squeeze 0

@@ -1,0 +1,16 @@
+# 크로스 빌드 설정: 보드(Arty Z7, ARMv7 Cortex-A9)와 Windows. 타깃별 절만 있어 기본 빌드·테스트·CI는 그대로다.
+#
+#   cargo build --release --target armv7-unknown-linux-musleabihf -p rx    보드용 (tools/board/bundle.sh)
+#   cargo test --target armv7-unknown-linux-musleabihf --workspace         보드 없이 qemu-arm에서 테스트
+#   cargo build --release --target x86_64-pc-windows-gnu -p pcap-replay    Windows에서 직접 보내기용
+#
+# musl: C 라이브러리까지 실행 파일에 넣는다(정적 링크) → 보드 이미지의 glibc 버전과 상관없이 돈다.
+#   링커는 apt의 gcc-arm-linux-gnueabihf. glibc용이지만 링크만 맡기고, crt·libc는 Rust가 가진 musl 것을 쓴다.
+# Windows: WSL2는 NAT라 WSL에서 보드로 보내면 간격이 흔들린다 → pcap-replay를 Windows에서 바로 돌린다.
+
+[target.armv7-unknown-linux-musleabihf]
+linker = "arm-linux-gnueabihf-gcc"
+runner = "qemu-arm"
+
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"

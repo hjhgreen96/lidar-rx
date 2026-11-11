@@ -1,0 +1,7 @@
+load,policy,wait_p50_us,wait_p99_us,wait_max_us,missing_packets,kernel_drops,receive_thread
+none,other,69,188,1439,0,0,"SCHED_OTHER, CPUs 1"
+none,fifo,68,158,484,0,0,"SCHED_FIFO priority 50, CPUs 1"
+same,other,83,10880,31785,0,0,"SCHED_OTHER, CPUs 1"
+same,fifo,82,183,680,0,0,"SCHED_FIFO priority 50, CPUs 1"
+other,other,75,1584,5370,0,0,"SCHED_OTHER, CPUs 1"
+other,fifo,73,175,244,0,0,"SCHED_FIFO priority 50, CPUs 1"

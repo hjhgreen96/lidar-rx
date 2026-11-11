@@ -1,0 +1,499 @@
+board_info.sh: 2022-10-21 23:09:01 UTC, host pynq, uid 0
+
+========== 1. image: /etc/os-release ==========
+--- /etc/os-release
+NAME="PynqLinux"
+VERSION="3.0 (Belfast)"
+ID=pynqlinux
+ID_LIKE=ubuntu
+PRETTY_NAME="PynqLinux, based on Ubuntu 22.04"
+VERSION_ID="3.0"
+HOME_URL="https://www.pynq.io/"
+SUPPORT_URL="https://discuss.pynq.io/"
+BUG_REPORT_URL="https://www.pynq.io"
+PRIVACY_POLICY_URL="https://www.pynq.io"
+VERSION_CODENAME=Belfast
+UBUNTU_CODENAME=jammy
+
+
+========== 2. image: PYNQ version ==========
+--- /home/xilinx/REVISION
+Release 2022_10_22 93ddd21
+Board 2022_10_22 93ddd21 https://github.com/Xilinx/PYNQ
+
+--- /etc/environment (BOARD / XILINX / PYNQ lines)
+PYNQ_JUPYTER_NOTEBOOKS=/home/xilinx/jupyter_notebooks
+PYNQ_PYTHON=python3.10
+$ pip3 show pynq
+WARNING: Package(s) not found: pynq
+(exit status 1)
+$ /usr/local/share/pynq-venv/bin/pip3 show pynq
+Name: pynq
+Version: 3.0.1
+Summary: (PY)thon productivity for zy(NQ)
+Home-page: https://github.com/Xilinx/PYNQ
+Author: Xilinx PYNQ Development Team
+Author-email: pynq_support@xilinx.com
+License: BSD 3-Clause
+Location: /usr/local/share/pynq-venv/lib/python3.10/site-packages
+Requires: cffi, nest-asyncio, numpy, pynqmetadata, pynqutils, setuptools
+Required-by: pynq-peripherals
+--- /home/xilinx/pynq-venv/bin/pip3: not present
+
+========== 3. kernel: uname -a ==========
+$ uname -a
+Linux pynq 5.15.19-xilinx-v2022.1 #1 SMP PREEMPT Mon Apr 11 17:52:14 UTC 2022 armv7l armv7l armv7l GNU/Linux
+
+========== 4. kernel: /proc/version (compiler that built the kernel) ==========
+--- /proc/version
+Linux version 5.15.19-xilinx-v2022.1 (oe-user@oe-host) (arm-xilinx-linux-gnueabi-gcc (GCC) 11.2.0, GNU ld (GNU Binutils) 2.37.20210721) #1 SMP PREEMPT Mon Apr 11 17:52:14 UTC 2022
+
+
+========== 5. CPU: nproc ==========
+$ nproc
+2
+
+========== 6. CPU: lscpu ==========
+$ lscpu
+Architecture:        armv7l
+Byte Order:          Little Endian
+CPU(s):              2
+On-line CPU(s) list: 0,1
+Vendor ID:           ARM
+Model name:          Cortex-A9
+Model:               0
+Thread(s) per core:  1
+Core(s) per socket:  2
+Socket(s):           1
+Stepping:            r3p0
+BogoMIPS:            325.00
+Flags:               half thumb fastmult vfp edsp neon vfpv3 tls vfpd32
+
+========== 7. memory: free -m ==========
+$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:             493          97         177           1         218         382
+Swap:            511           0         511
+
+========== 8. disk: df -h / ==========
+$ df -h /
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.0G  5.5G  1.1G  84% /
+
+========== 9. kernel command line: /proc/cmdline ==========
+--- /proc/cmdline
+root=/dev/mmcblk0p2 rw earlyprintk rootfstype=ext4 rootwait devtmpfs.mount=1 uio_pdrv_genirq.of_id="generic-uio" clk_ignore_unused
+
+
+========== 10. module build: /lib/modules/5.15.19-xilinx-v2022.1/build ==========
+$ ls -ld /lib/modules/5.15.19-xilinx-v2022.1/build
+drwxr-xr-x 23 root root 4096 Oct 22  2022 /lib/modules/5.15.19-xilinx-v2022.1/build
+resolves to: /usr/lib/modules/5.15.19-xilinx-v2022.1/build
+  present: Makefile
+  present: .config
+  present: Module.symvers
+  present: include/generated/utsrelease.h
+  present: include/config/kernel.release
+  missing: scripts/mod/modpost
+#define UTS_RELEASE "5.15.19-xilinx-v2022.1"
+$ ls /lib/modules
+5.15.19-xilinx-v2022.1
+
+========== 11. module build: vermagic of an existing module (a module we build must match this) ==========
+$ modinfo -F vermagic /lib/modules/5.15.19-xilinx-v2022.1/extra/zocl.ko
+5.15.19-xilinx-v2022.1 SMP preempt mod_unload modversions ARMv7 p2v8 
+$ modinfo -F vermagic zocl
+5.15.19-xilinx-v2022.1 SMP preempt mod_unload modversions ARMv7 p2v8 
+--- /sys/module/module/parameters/sig_enforce: not present
+$ lsmod
+Module                  Size  Used by
+zocl                  143360  0
+uio_pdrv_genirq        16384  0
+
+========== 12. module build: installed kernel packages (dpkg -l | grep linux-headers|linux-image) ==========
+(no matching packages)
+
+========== 13. module build: gcc --version ==========
+$ gcc --version
+gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+========== 14. module build: make --version ==========
+$ make --version
+GNU Make 4.3
+Built for arm-unknown-linux-gnueabihf
+Copyright (C) 1988-2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+========== 15. kernel config ==========
+source: /proc/config.gz
+  CONFIG_MODULES                   y
+  CONFIG_MODVERSIONS               y
+  CONFIG_MODULE_SIG                not set
+  CONFIG_MODULE_SIG_FORCE          (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_DEBUG_INFO_BTF            (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_MODULE_ALLOW_BTF_MISMATCH (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_NETFILTER                 y
+  CONFIG_PROC_FS                   y
+  CONFIG_FTRACE                    not set
+  CONFIG_FUNCTION_TRACER           (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_TRACEPOINTS               (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_KPROBES                   not set
+  CONFIG_BPF_SYSCALL               y
+  CONFIG_RT_GROUP_SCHED            y
+  CONFIG_PREEMPT                   y
+  CONFIG_PREEMPT_NONE              not set
+  CONFIG_PREEMPT_VOLUNTARY         not set
+  CONFIG_PREEMPT_DYNAMIC           (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_PREEMPT_RT                (absent: option does not exist in this kernel or its dependencies are off)
+  CONFIG_HZ                        100
+  CONFIG_NO_HZ_IDLE                y
+  CONFIG_NO_HZ_FULL                not set
+  CONFIG_HIGH_RES_TIMERS           y
+  CONFIG_CC_VERSION_TEXT           "arm-xilinx-linux-gnueabi-gcc (GCC) 11.2.0"
+  CONFIG_LOCALVERSION              "-xilinx-v2022.1"
+  CONFIG_LOCALVERSION_AUTO         y
+
+========== 16. systemd: version ==========
+$ systemctl --version
+systemd 249 (249.11-0ubuntu3)
++PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT +GNUTLS -OPENSSL +ACL +BLKID +CURL +ELFUTILS -FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP -LIBFDISK +PCRE2 -PWQUALITY -P11KIT -QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified
+
+========== 17. systemd: systemd-detect-virt (none = real hardware) ==========
+$ systemd-detect-virt
+none
+(exit status 1)
+
+========== 18. systemd: systemctl is-active systemd-modules-load ==========
+$ systemctl is-active systemd-modules-load
+active
+
+========== 19. systemd: running services ==========
+$ systemctl list-units --type=service --state=running --no-pager --no-legend
+  cron.service                loaded active running Regular background program processing daemon
+  dbus.service                loaded active running D-Bus System Message Bus
+  getty@tty1.service          loaded active running Getty on tty1
+  jupyter.service             loaded active running Jupyter Notebook Server
+  networkd-dispatcher.service loaded active running Dispatcher daemon for systemd-networkd
+  nmbd.service                loaded active running Samba NMB Daemon
+  rsyslog.service             loaded active running System Logging Service
+  serial-getty@ttyPS0.service loaded active running Serial Getty on ttyPS0
+  smbd.service                loaded active running Samba SMB Daemon
+  ssh.service                 loaded active running OpenBSD Secure Shell server
+  systemd-journald.service    loaded active running Journal Service
+  systemd-logind.service      loaded active running User Login Management
+  systemd-resolved.service    loaded active running Network Name Resolution
+  systemd-timesyncd.service   loaded active running Network Time Synchronization
+  systemd-udevd.service       loaded active running Rule-based Manager for Device Events and Files
+  unattended-upgrades.service loaded active running Unattended Upgrades Shutdown
+  user@1000.service           loaded active running User Manager for UID 1000
+
+========== 20. systemd: systemctl is-active irqbalance ==========
+$ systemctl is-active irqbalance
+inactive
+(exit status 3)
+
+========== 21. systemd: boot time (systemd-analyze) ==========
+$ systemd-analyze
+Startup finished in 3.895s (kernel) + 1min 20.354s (userspace) = 1min 24.250s 
+multi-user.target reached after 29.314s in userspace
+
+========== 22. systemd: systemd-analyze critical-chain ==========
+$ systemd-analyze critical-chain --no-pager
+The time when unit became active or started is printed after the "@" character.
+The time the unit took to start is printed after the "+" character.
+
+multi-user.target @29.314s
+`-smbd.service @26.215s +3.096s
+  `-nmbd.service @24.292s +1.895s
+    `-network-online.target @24.085s
+      `-network.target @24.057s
+        `-networking.service @7.831s +16.196s
+          `-ifupdown-pre.service @3.649s +3.837s
+            `-systemd-udev-trigger.service @2.778s +828ms
+              `-systemd-udevd-kernel.socket @2.105s
+                `-system.slice @718ms
+                  `--.slice @719ms
+
+========== 23. sysctl ==========
+  net.core.rmem_max                180224
+  net.core.rmem_default            180224
+  net.core.netdev_max_backlog      1000
+  net.core.netdev_budget           300
+  kernel.sched_rt_runtime_us       950000
+  kernel.sched_rt_period_us        1000000
+  kernel.core_pattern              |/usr/share/apport/apport %p %s %c %d %P %E
+
+========== 24. real-time limits: ulimit -r ==========
+this shell (root): 0
+user xilinx: 0
+
+========== 25. real-time priorities: chrt -m ==========
+$ chrt -m
+SCHED_OTHER min/max priority	: 0/0
+SCHED_FIFO min/max priority	: 1/99
+SCHED_RR min/max priority	: 1/99
+SCHED_BATCH min/max priority	: 0/0
+SCHED_IDLE min/max priority	: 0/0
+SCHED_DEADLINE min/max priority	: 0/0
+
+========== 26. network: ip -br addr ==========
+$ ip -br addr
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+dummy0           DOWN           
+eth0             DOWN           192.168.2.99/24 
+sit0@NONE        DOWN           
+
+========== 27. network: ip route ==========
+$ ip route
+192.168.2.0/24 dev eth0 proto kernel scope link src 192.168.2.99 linkdown 
+
+========== 28. NIC (eth0): ethtool -i ==========
+$ ethtool -i eth0
+driver: macb
+version: 5.15.19-xilinx-v2022.1
+firmware-version: 
+expansion-rom-version: 
+bus-info: e000b000.ethernet
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no
+
+========== 29. NIC (eth0): ethtool -k (offloads: checksum, GRO, ...) ==========
+$ ethtool -k eth0 | (selected lines)
+Features for eth0:
+rx-checksumming: on
+tx-checksumming: on
+scatter-gather: on
+tcp-segmentation-offload: off
+generic-segmentation-offload: on
+generic-receive-offload: on
+large-receive-offload: off [fixed]
+rx-vlan-offload: off [fixed]
+receive-hashing: off [fixed]
+rx-gro-hw: off [fixed]
+rx-gro-list: off
+rx-udp-gro-forwarding: off
+
+========== 30. NIC (eth0): ethtool -g (ring sizes) ==========
+$ ethtool -g eth0
+Ring parameters for eth0:
+Pre-set maximums:
+RX:		8192
+RX Mini:	n/a
+RX Jumbo:	n/a
+TX:		4096
+Current hardware settings:
+RX:		512
+RX Mini:	n/a
+RX Jumbo:	n/a
+TX:		512
+
+========== 31. NIC (eth0): ethtool -S (first 60 lines) ==========
+$ ethtool -S eth0 | head -n 60
+NIC statistics:
+     tx_octets: 0
+     tx_frames: 0
+     tx_broadcast_frames: 0
+     tx_multicast_frames: 0
+     tx_pause_frames: 0
+     tx_64_byte_frames: 0
+     tx_65_127_byte_frames: 0
+     tx_128_255_byte_frames: 0
+     tx_256_511_byte_frames: 0
+     tx_512_1023_byte_frames: 0
+     tx_1024_1518_byte_frames: 0
+     tx_greater_than_1518_byte_frames: 0
+     tx_underrun: 0
+     tx_single_collision_frames: 0
+     tx_multiple_collision_frames: 0
+     tx_excessive_collisions: 0
+     tx_late_collisions: 0
+     tx_deferred_frames: 0
+     tx_carrier_sense_errors: 0
+     rx_octets: 0
+     rx_frames: 0
+     rx_broadcast_frames: 0
+     rx_multicast_frames: 0
+     rx_pause_frames: 0
+     rx_64_byte_frames: 0
+     rx_65_127_byte_frames: 0
+     rx_128_255_byte_frames: 0
+     rx_256_511_byte_frames: 0
+     rx_512_1023_byte_frames: 0
+     rx_1024_1518_byte_frames: 0
+     rx_greater_than_1518_byte_frames: 0
+     rx_undersized_frames: 0
+     rx_oversize_frames: 0
+     rx_jabbers: 0
+     rx_frame_check_sequence_errors: 0
+     rx_length_field_frame_errors: 0
+     rx_symbol_errors: 0
+     rx_alignment_errors: 0
+     rx_resource_errors: 0
+     rx_overruns: 0
+     rx_ip_header_checksum_errors: 0
+     rx_tcp_checksum_errors: 0
+     rx_udp_checksum_errors: 0
+     q0_rx_packets: 0
+     q0_rx_bytes: 0
+     q0_rx_dropped: 0
+     q0_tx_packets: 0
+     q0_tx_bytes: 0
+     q0_tx_dropped: 0
+
+========== 32. NIC interrupts: /proc/interrupts (header + Ethernet lines) and smp_affinity ==========
+           CPU0       CPU1       
+ 34:          0          0     GIC-0  54 Level     eth0
+  /proc/irq/34/smp_affinity             3
+  /proc/irq/34/smp_affinity_list        0-1
+  /proc/irq/34/effective_affinity_list  0
+--- IRQ / softirq kernel threads (class, RT priority, CPU)
+  PID CLS RTPRIO PSR COMMAND
+   11  TS      -   0 ksoftirqd/0
+   17  TS      -   1 ksoftirqd/1
+   77  FF     50   0 irq/35-mmc0
+
+========== 33. NIC driver: /sys/bus/platform/drivers (macb / gem) ==========
+--- /sys/bus/platform/drivers/macb
+total 0
+--w------- 1 root root 4096 Oct 21 23:09 bind
+lrwxrwxrwx 1 root root    0 Oct 21 23:09 e000b000.ethernet -> ../../../../devices/soc0/axi/e000b000.ethernet
+--w------- 1 root root 4096 Oct 21 23:06 uevent
+--w------- 1 root root 4096 Oct 21 23:09 unbind
+
+========== 34. device tree: ethernet@* nodes (compatible, status, phy-mode) ==========
+--- /proc/device-tree/amba/ethernet@e000b000
+--- /proc/device-tree/axi/ethernet@e000c000
+  compatible           cdns,zynq-gem cdns,gem 
+  status               disabled 
+--- /proc/device-tree/axi/ethernet@e000b000
+  compatible           cdns,zynq-gem cdns,gem 
+  status               okay 
+  phy-mode             rgmii-id 
+
+========== 35. NIC driver: /sys/class/net/eth0/device/driver ==========
+link target: ../../../../bus/platform/drivers/macb
+resolved:    /sys/bus/platform/drivers/macb
+
+========== 36. tracing: tracefs / events ==========
+--- tracefs / debugfs mounts
+debugfs /sys/kernel/debug debugfs rw,nosuid,nodev,noexec,relatime 0 0
+/sys/kernel/tracing: not usable (missing or not mounted)
+/sys/kernel/debug/tracing: not usable (missing or not mounted)
+
+========== 37. boot: lsblk -f ==========
+$ lsblk -f
+NAME        FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+mtdblock0                                                                          
+mmcblk0                                                                            
+|-mmcblk0p1 vfat   FAT16 PYNQ  E3CD-7EB7                             122.6M     6% /boot
+`-mmcblk0p2 ext4   1.0   root  9b528186-000b-4f7c-ae17-d8757c9fc665    1.1G    79% /
+
+========== 38. boot: findmnt ==========
+$ findmnt
+TARGET                                        SOURCE         FSTYPE   OPTIONS
+/                                             /dev/mmcblk0p2 ext4     rw,relatime
+|-/dev                                        devtmpfs       devtmpfs rw,relatime,size=186664k,nr_inodes=46666,mode=755
+| |-/dev/shm                                  tmpfs          tmpfs    rw,nosuid,nodev
+| |-/dev/pts                                  devpts         devpts   rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000
+| `-/dev/mqueue                               mqueue         mqueue   rw,nosuid,nodev,noexec,relatime
+|-/proc                                       proc           proc     rw,nosuid,nodev,noexec,relatime
+|-/sys                                        sysfs          sysfs    rw,nosuid,nodev,noexec,relatime
+| |-/sys/fs/cgroup                            cgroup2        cgroup2  rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot
+| |-/sys/fs/bpf                               bpf            bpf      rw,nosuid,nodev,noexec,relatime,mode=700
+| |-/sys/kernel/debug                         debugfs        debugfs  rw,nosuid,nodev,noexec,relatime
+| `-/sys/kernel/config                        configfs       configfs rw,nosuid,nodev,noexec,relatime
+|-/run                                        tmpfs          tmpfs    rw,nosuid,nodev,size=101088k,nr_inodes=819200,mode=755
+| |-/run/lock                                 tmpfs          tmpfs    rw,nosuid,nodev,noexec,relatime,size=5120k
+| |-/run/credentials/systemd-sysusers.service none           ramfs    ro,nosuid,nodev,noexec,relatime,mode=700
+| `-/run/user/1000                            tmpfs          tmpfs    rw,nosuid,nodev,relatime,size=50540k,nr_inodes=12635,mode=700,uid=1000,gid=1000
+`-/boot                                       /dev/mmcblk0p1 vfat     rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro
+
+========== 39. boot: files on the FAT boot partition ==========
+--- mounted at /boot
+total 7416
+drwxr-xr-x  3 root root   16384 Jan  1  1970 .
+drwxr-xr-x 18 root root    4096 Oct 21 23:07 ..
+-rwxr-xr-x  1 root root 1087800 Oct 22  2022 BOOT.BIN
+-rwxr-xr-x  1 root root      83 Oct 22  2022 REVISION
+drwxr-xr-x  2 root root    4096 Nov 11  2026 System Volume Information
+-rwxr-xr-x  1 root root     990 Oct 22  2022 boot.py
+-rwxr-xr-x  1 root root    2776 Oct 22  2022 boot.scr
+-rwxr-xr-x  1 root root 6464304 Oct 22  2022 image.ub
+
+========== 40. boot: dmesg | head -n 60 ==========
+[    0.000071] Switching to timer-based delay loop, resolution 6ns
+[    0.000947] Console: colour dummy device 80x30
+[    0.001639] printk: console [tty0] enabled
+[    0.001686] Calibrating delay loop (skipped), value calculated using timer frequency.. 325.00 BogoMIPS (lpj=1625000)
+[    0.001735] pid_max: default: 32768 minimum: 301
+[    0.002007] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.002049] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.003264] CPU: Testing write buffer coherency: ok
+[    0.003328] CPU0: Spectre v2: using BPIALL workaround
+[    0.003590] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.004579] Setting up static identity map for 0x100000 - 0x100060
+[    0.004794] rcu: Hierarchical SRCU implementation.
+[    0.005254] smp: Bringing up secondary CPUs ...
+[    0.006293] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.006316] CPU1: Spectre v2: using BPIALL workaround
+[    0.006522] smp: Brought up 1 node, 2 CPUs
+[    0.006556] SMP: Total of 2 processors activated (650.00 BogoMIPS).
+[    0.006586] CPU: All CPU(s) started in SVC mode.
+[    0.007282] devtmpfs: initialized
+[    0.012676] VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 4
+[    0.012979] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.013042] futex hash table entries: 512 (order: 3, 32768 bytes, linear)
+[    0.022249] pinctrl core: initialized pinctrl subsystem
+[    0.023570] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.026600] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.027955] thermal_sys: Registered thermal governor 'step_wise'
+[    0.028118] cpuidle: using governor menu
+[    0.038751] amba f8801000.etb: Fixing up cyclic dependency with replicator
+[    0.039223] amba f8803000.tpiu: Fixing up cyclic dependency with replicator
+[    0.039704] amba f8804000.funnel: Fixing up cyclic dependency with replicator
+[    0.040214] amba f889c000.ptm: Fixing up cyclic dependency with f8804000.funnel
+[    0.040678] amba f889d000.ptm: Fixing up cyclic dependency with f8804000.funnel
+[    0.041809] hw-breakpoint: found 5 (+1 reserved) breakpoint and 1 watchpoint registers.
+[    0.041852] hw-breakpoint: maximum watchpoint size is 4 bytes.
+[    0.042012] zynq-ocm f800c000.ocmc: ZYNQ OCM pool: 256 KiB @ 0x(ptrval)
+[    0.042866] e0000000.serial: ttyPS0 at MMIO 0xe0000000 (irq = 32, base_baud = 6250000) is a xuartps
+[    0.457883] printk: console [ttyPS0] enabled
+[    0.640398] raid6: int32x8  gen()   117 MB/s
+[    0.810238] raid6: int32x8  xor()    78 MB/s
+[    0.980482] raid6: int32x4  gen()   124 MB/s
+[    1.150300] raid6: int32x4  xor()    88 MB/s
+[    1.320284] raid6: int32x2  gen()   200 MB/s
+[    1.490278] raid6: int32x2  xor()   117 MB/s
+[    1.660308] raid6: int32x1  gen()   180 MB/s
+[    1.830287] raid6: int32x1  xor()   100 MB/s
+[    1.833265] raid6: using algorithm int32x2 gen() 200 MB/s
+[    1.837370] raid6: .... xor() 117 MB/s, rmw enabled
+[    1.840961] raid6: using intx1 recovery algorithm
+[    1.845324] vgaarb: loaded
+[    1.847290] SCSI subsystem initialized
+[    1.850047] usbcore: registered new interface driver usbfs
+[    1.854336] usbcore: registered new interface driver hub
+[    1.858401] usbcore: registered new device driver usb
+[    1.862395] mc: Linux media interface: v0.10
+[    1.865403] videodev: Linux video capture interface: v2.00
+[    1.869676] pps_core: LinuxPPS API ver. 1 registered
+[    1.873361] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    1.881255] PTP clock support registered
+[    1.883943] EDAC MC: Ver: 3.0.0
+[    1.886409] FPGA manager framework
+
+========== 41. boot: dmesg lines for macb / eth0 / machine model / devicetree ==========
+[    2.946335] macb e000b000.ethernet eth0: Cadence GEM rev 0x00020118 at 0xe000b000 irq 34 (00:18:3e:02:a8:75)
+[   13.871117] macb e000b000.ethernet eth0: PHY [e000b000.ethernet-ffffffff:00] driver [RTL8211E Gigabit Ethernet] (irq=POLL)
+[   13.871178] macb e000b000.ethernet eth0: configuring for phy/rgmii-id link mode
+
+board_info.sh: done

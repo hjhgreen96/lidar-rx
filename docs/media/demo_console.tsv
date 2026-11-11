@@ -1,0 +1,24 @@
+-9.01	cmd	tools/rviz_demo.sh
+-8.97	out	lidar-rx: listening on 127.0.0.1:2371, socket receive buffer 212992 B (requested None)
+-6.92	out	rx: 400 pkt/s 5.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 91 us | clock (collecting) | queue-drops stats 0 ros2 0
+-4.92	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 71 us | clock -0.07 ppm (lsq -1.23) p99 39 us | queue-drops stats 0 ros2 0
+-2.92	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 62 us | clock -0.07 ppm (lsq -0.69) p99 38 us | queue-drops stats 0 ros2 0
+-0.92	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 58 us | clock +0.02 ppm (lsq -0.32) p99 32 us | queue-drops stats 0 ros2 0
+1.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 56 us | clock +0.02 ppm (lsq -0.17) p99 26 us | queue-drops stats 0 ros2 0
+3.08	out	rx: 754 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 56 us | clock +0.01 ppm (lsq -0.06) p99 24 us | queue-drops stats 0 ros2 0
+5.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 57 us | clock +0.01 ppm (lsq -0.00) p99 25 us | queue-drops stats 0 ros2 0
+7.08	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 57 us | clock +0.01 ppm (lsq +0.07) p99 28 us | queue-drops stats 0 ros2 0
+9.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 59 us | clock +0.01 ppm (lsq +0.08) p99 30 us | queue-drops stats 0 ros2 0
+11.08	out	rx: 753 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 59 us | clock +0.03 ppm (lsq +0.08) p99 31 us | queue-drops stats 0 ros2 0
+13.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 60 us | clock +0.02 ppm (lsq +0.05) p99 29 us | queue-drops stats 0 ros2 0
+15.08	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 59 us | clock +0.02 ppm (lsq +0.04) p99 27 us | queue-drops stats 0 ros2 0
+17.08	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 59 us | clock +0.02 ppm (lsq +0.03) p99 26 us | queue-drops stats 0 ros2 0
+18.12	cmd	target/release/pcap-replay data/vlp16.pcap --pace sensor --loops 0 --drift-ppm 100
+19.08	out	rx: 750 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock (collecting) | queue-drops stats 0 ros2 0
+21.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock +99.98 ppm (lsq +101.55) p99 24 us | queue-drops stats 0 ros2 0
+23.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock +100.01 ppm (lsq +99.65) p99 30 us | queue-drops stats 0 ros2 0
+25.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock +100.01 ppm (lsq +99.82) p99 35 us | queue-drops stats 0 ros2 0
+27.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock +100.00 ppm (lsq +99.72) p99 26 us | queue-drops stats 0 ros2 0
+29.08	out	rx: 753 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock +100.00 ppm (lsq +99.76) p99 24 us | queue-drops stats 0 ros2 0
+31.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 59 us | clock +100.00 ppm (lsq +99.83) p99 22 us | queue-drops stats 0 ros2 0
+33.08	out	rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 1 kernel-drops 0 wait-p99 60 us | clock +100.00 ppm (lsq +99.89) p99 21 us | queue-drops stats 0 ros2 0

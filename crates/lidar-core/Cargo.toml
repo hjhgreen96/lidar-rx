@@ -1,0 +1,9 @@
+[package]
+name = "lidar-core"
+description = "센서와 무관한 공통 타입과 경계(인터페이스): Packet, PacketSource, SensorDecoder, Frame"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]

@@ -1,0 +1,108 @@
+# Windows 안 받는 단계별 시간 (pktmon --comp all, 보드 → PC:2369, 7,092개)
+packets from the board: 7092
+step (component edge -> component edge)            n     p50 ms   p99 ms   max ms
+('NIC(rtux64w10)', 1, 'WFP Native', 2)            7092    -0.019    0.080    0.091
+('WFP Native', 2, 'WFP Native', 1)                7092     0.001    0.081    0.091
+('WFP Native', 1, 'WFP 802.3', 2)                 7092     0.020    0.070    0.090
+('WFP 802.3', 2, 'WFP 802.3', 1)                  7092     0.003    0.092    0.116
+('WFP 802.3', 1, 'TCPIP', 1)                      7092     0.023   13.305   46.425
+first and last appearance on the same thread: {('NIC(rtux64w10)', False): 6531, ('NIC(rtux64w10)', True): 561}
+NIC -> TCPIP total: p50 0.029 p99 13.330 max 46.478 ms
+TCPIP -> program (excess over 1 s window min): p50 0.064 p99 8.677 max 17.365 ms  (n 7092, rtt rows 7092)
+NIC -> program (excess): p50 0.068 p99 13.449 max 46.551 ms
+
+# 받는 쪽 MAC·UDP 단계에 걸린 WFP 콜아웃 (netsh wfp show filters)
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4            x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {8f0c108f-3443-410b-a224-2be0580cdd8b}
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4            x1   FTP 검사 필터                                                    provider FWPM_PROVIDER_MPSSVC_WF callout {c3dbed20-0bb6-4bf3-828d-96732e1e022c}
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4            x1   NgcSock ALE Accept Callout V4                                provider - callout {11d277f8-73e4-437a-a28c-4c0730f88de6}
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6            x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {5a12d3be-d8ec-4bf3-9433-496a089220d5}
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6            x1   FTP 검사 필터                                                    provider FWPM_PROVIDER_MPSSVC_WF callout {c3dbed20-0bb6-4bf3-828d-96732e1e022e}
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6            x1   NgcSock ALE Accept Callout V6                                provider - callout {9a90c980-86c1-46dc-8eb7-d6f7ac79facb}
+FWPM_LAYER_INBOUND_MAC_FRAME_ETHERNET         x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {3d7c4e5a-8d3b-47c2-b983-c6d6c87aa192}
+FWPM_LAYER_OUTBOUND_MAC_FRAME_ETHERNET        x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {037777cf-f568-49ed-acbe-c84630a17419}
+
+# 여섯 지점 (pktmon --comp nics + 보드 --forward-tx-log + pcap-replay --echo)
+pktmon: out 7093 (unique 7093), back 7093 (+0 duplicates); board tx log 7093; replay 7093
+
+-- 같은 시계 (Windows NIC 단계, pktmon)
+왕복 at NIC: NIC 송신 → NIC 도착 (E−B)                     n  7093  p50    0.319  p99    2.571  max    8.300 ms
+-- 같은 시계 (보드)
+보드: 커널 도착 → 드라이버에 넘김 (D−C)                           n  7093  p50    0.121  p99    0.266  max    0.771 ms
+-- 다른 시계: 1 s 창 최소를 뺀 "더 걸린 만큼"
+PC NIC 송신 → 보드 커널 도착 (C−B) 초과분                       n  7093  p50    0.004  p99    0.035  max    1.570 ms
+보드 드라이버 송신 → PC NIC 도착 (E−D) 초과분                     n  7093  p50    0.004  p99    2.260  max    7.988 ms
+PC 프로그램 송신 → PC NIC 송신 (B−A) 초과분                     n  7093  p50    0.003  p99    0.026  max    1.193 ms
+PC NIC 도착 → PC 프로그램 수신 (F−E) 초과분                     n  7093  p50    0.014  p99   12.794  max   15.463 ms
+왕복 at 프로그램 (F−A)                                     n  7093  p50    0.372  p99   13.155  max   18.876 ms
+
+-- 간격 (패킷 간격 1.327 ms)
+보드 드라이버 송신 간격: p1 1.230  p50 1.326  p99 1.497  max 3.002 ms
+PC NIC 도착 간격:       p1 0.011  p50 1.326  p99 1.595  max 9.309 ms   (0.05 ms 미만: 87개)
+
+
+# AhnLab Safe Transaction 설정에서 네트워크 침입 차단을 끈 뒤 (WFP 필터는 그대로 남음)
+## WFP 콜아웃
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4            x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {8f0c108f-3443-410b-a224-2be0580cdd8b}
+FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6            x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {5a12d3be-d8ec-4bf3-9433-496a089220d5}
+FWPM_LAYER_INBOUND_MAC_FRAME_ETHERNET         x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {3d7c4e5a-8d3b-47c2-b983-c6d6c87aa192}
+FWPM_LAYER_OUTBOUND_MAC_FRAME_ETHERNET        x2   Ahnlab Network Filtering Filter                              provider {5f655c8a-7906-45ba-8fcf-8dc4892ba34a} callout {037777cf-f568-49ed-acbe-c84630a17419}
+## 구성 요소별 (구성 요소 번호는 pktmon이 다시 매김: 83 NIC, 84 WFP Native, 86 WFP 802.3, 89 TCPIP)
+packets from the board: 7093
+step (component edge -> component edge)            n     p50 ms   p99 ms   max ms
+(83, 1, 84, 2)                                    7093    -0.019    0.080    0.090
+(84, 2, 84, 1)                                    7093     0.001    0.090    0.091
+(84, 1, 86, 2)                                    7093     0.030    0.060    0.082
+(86, 2, 86, 1)                                    7093     0.002    0.091    0.100
+(86, 1, 89, 1)                                    7093     0.019   12.685   15.547
+first and last appearance on the same thread: {(None, False): 6526, (None, True): 567}
+NIC -> TCPIP total: p50 0.024 p99 12.698 max 15.571 ms
+TCPIP -> program (excess over 1 s window min): p50 0.060 p99 0.179 max 0.289 ms  (n 7093, rtt rows 7093)
+NIC -> program (excess): p50 0.067 p99 12.800 max 15.744 ms
+## 붙잡힌 패킷이 풀려나는 순간 (타이머 틱의 배수인가) - 켜 둔 때 / 끈 때
+held packets (>1 ms): 877 of 7092; release moments: 220; packets per release: max 11
+gaps between releases: 219; within 5% of a whole number of 15.625 ms ticks: 29 (13%)
+first gaps (ms): 30.11 103.68 19.10 31.27 2.26 3.95 4.97 48.72 42.77 133.40 21.74 82.21 131.29 31.65 37.94 8.68 0.22 11.94 22.97 4.90
+CPU (NIC -> TCPIP) for held packets: [((0, 0), 866), ((1, 1), 11)]
+CPU (NIC -> TCPIP) for all packets: [((0, 0), 6968), ((1, 1), 124)]
+indicated on CPU 0: 6968, of which held >1 ms: 866 (12%)
+held packets (>1 ms): 916 of 7093; release moments: 171; packets per release: max 8
+gaps between releases: 170; within 5% of a whole number of 15.625 ms ticks: 33 (19%)
+first gaps (ms): 4.16 3.40 27.07 60.59 18.24 43.96 60.61 15.54 47.37 28.36 20.99 10.07 8.55 3.65 9.30 32.16 63.11 32.09 79.82 23.61
+CPU (NIC -> TCPIP) for held packets: [((0, 0), 916)]
+CPU (NIC -> TCPIP) for all packets: [((0, 0), 7093)]
+indicated on CPU 0: 7093, of which held >1 ms: 916 (12%)
+
+# 받는 패킷을 TCPIP로 넘기는 스레드가 누구인가 (커널 추적: logman NT Kernel Logger, 스레드·드라이버 목록)
+kernel images 480, system threads 416
+tid 480: start 0xfffff8045cdf7340 -> \SystemRoot\system32\drivers\ndis.sys +0x37340; base priority 8, affinity 0x1
+tid 484: start 0xfffff8045cdf7340 -> \SystemRoot\system32\drivers\ndis.sys +0x37340; base priority 8, affinity 0x2
+system threads by start module (top): [('\\SystemRoot\\system32\\ntoskrnl.exe', 153), ('\\SystemRoot\\System32\\drivers\\AgileVpn.sys', 48), ('\\SystemRoot\\System32\\drivers\\vmbusr.sys', 48), ('\\SystemRoot\\system32\\drivers\\wd\\WdFilter.sys', 33), ('\\SystemRoot\\System32\\DriverStore\\FileRepository\\xvdd.inf_amd64_8f15a2927d7ab02d\\xvdd.sys', 18), ('\\SystemRoot\\System32\\drivers\\vmswitch.sys', 17), ('\\SystemRoot\\system32\\drivers\\ndis.sys', 16), ('\\SystemRoot\\System32\\drivers\\volsnap.sys', 9), ('\\SystemRoot\\System32\\drivers\\vhdmp.sys', 8), ('\\SystemRoot\\system32\\DRIVERS\\acsock64.sys', 6), ('\\SystemRoot\\system32\\drivers\\Wdf01000.sys', 4), ('\\SystemRoot\\System32\\drivers\\dxgmms2.sys', 4)]
+
+# 붙잡힌 패킷 / 빠른 패킷: 단계마다 처리한 PID.TID (AhnLab 지운 뒤)
+TCPIP step, held  (pid.tid): [('35732.2608', 496), ('4.480', 383), ('12176.10504', 45), ('3872.58700', 41), ('58136.50604', 14), ('44764.7752', 8)]
+TCPIP step, fast  (pid.tid): [('4.480', 6037), ('12176.10504', 7), ('35732.2608', 6), ('8144.45144', 2), ('58136.50604', 2), ('2932.32872', 2)]
+NIC step,   held  (pid.tid): [('35732.2608', 645), ('24112.24116', 87), ('12176.10504', 79), ('3872.58700', 41), ('4.112', 40), ('4768.5088', 20)]
+NIC step,   fast  (pid.tid): [('0.0', 5402), ('35732.2608', 164), ('24112.24116', 63), ('2932.32872', 48), ('4.480', 31), ('55340.12252', 23)]
+
+# AhnLab Safe Transaction을 지운 뒤: WFP의 AhnLab 콜아웃 수
+0
+## 구성 요소별 (96 NIC, 97 WFP 필터, 103 TCPIP)
+packets from the board: 7093
+step (component edge -> component edge)            n     p50 ms   p99 ms   max ms
+(96, 1, 97, 2)                                    7093    -0.019    0.080    0.127
+(97, 2, 97, 1)                                    7093     0.001    0.081    0.145
+(97, 1, 103, 1)                                   7093     0.020   13.116   16.517
+first and last appearance on the same thread: {(None, False): 6401, (None, True): 692}
+NIC -> TCPIP total: p50 0.023 p99 13.097 max 16.450 ms
+TCPIP -> program (excess over 1 s window min): p50 0.057 p99 0.152 max 0.272 ms  (n 7093, rtt rows 7093)
+NIC -> program (excess): p50 0.066 p99 13.241 max 16.543 ms
+
+# 송신 프로그램(pcap-replay)의 CPU를 바꿔 가며 왕복 (패킷마다 sender_*.csv)
+sender_aff_none.csv        p50    369 us  p99  13632 us  max  20169 us
+sender_aff_not0.csv        p50    364 us  p99  10994 us  max  31663 us
+sender_aff_not0_2.csv      p50    361 us  p99   6766 us  max  32534 us
+sender_aff_only0.csv       p50  13134 us  p99  28280 us  max  36110 us
+sender_noahn_none.csv      p50    357 us  p99  12953 us  max  16015 us
+sender_noahn_not0.csv      p50    352 us  p99   6645 us  max  14540 us
+sender_noahn_only0.csv     p50  11784 us  p99  28120 us  max  31807 us
+  (aff_: AhnLab 있을 때, noahn_: AhnLab 지운 뒤 / none: 지정 없음, only0: CPU 0에만, not0: CPU 0 제외)

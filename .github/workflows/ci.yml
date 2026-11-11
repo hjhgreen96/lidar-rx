@@ -1,0 +1,24 @@
+# 푸시·PR마다: 포맷, clippy(경고 = 오류), 테스트 (참조 구현 골든 대조와 loopback UDP 소켓 테스트 포함).
+# ROS 2 feature는 끈다 (ROS 2 설치가 필요하고 실행 파일이 ROS 2 라이브러리에 동적 링크됨).
+# 커널 모듈은 실행 중인 커널 트리가 필요해 여기서 빌드하지 않는다 (WSL에서 tools/wsl-kernel, 보드는 5단계).
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  rust:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+      # Cargo.toml의 rust-version(1.85)과 같은 툴체인으로 고정: 새 stable의 clippy가 늘린 검사가 CI를 깨지 않게
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.85.1
+          components: rustfmt, clippy
+      - name: sample data (ROS 공식 서버의 VLP-16 캡처, 해시 확인)
+        run: tools/fetch_data.sh
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace

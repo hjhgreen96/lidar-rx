@@ -1,0 +1,10 @@
+[package]
+name = "clock"
+description = "센서 시계 → 호스트 시계 관계 추정 (하한선 방법)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+lidar-core.workspace = true

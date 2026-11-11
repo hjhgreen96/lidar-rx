@@ -1,0 +1,21 @@
+# 녹화 서비스: /velodyne_points를 ros2 bag으로 녹화. lidar-rx와는 ROS 2 토픽으로만 통신하는 별도 프로세스 (docs/modules/deploy.md)
+[Unit]
+Description=lidar-record: record /velodyne_points with ros2 bag
+# 순서만 준다: lidar-rx가 READY를 보낸 뒤에 시작. 생명주기는 묶지 않는다(BindsTo= 안 씀) - 수신이 재시작돼도
+# 녹화 프로세스는 그대로 있고, 발행자가 돌아오면 다시 받는다.
+After=lidar-rx.service
+Wants=lidar-rx.service
+
+[Service]
+# lidar-rx와 같은 사용자: Fast DDS의 공유 메모리 파일은 만든 사용자 권한으로 생긴다
+User=lidar
+EnvironmentFile=/etc/lidar-rx/ros2.env
+# 폴더 이름은 시작 시각 (systemd가 %를 해석하므로 %%). 60초마다 파일을 나눈다
+ExecStart=/bin/sh -c 'exec ros2 bag record --max-bag-duration 60 -o "$HOME/bags/$(date +%%Y%%m%%d-%%H%%M%%S)" /velodyne_points'
+# rosbag2(Humble 0.15.7 이후)는 SIGTERM을 Ctrl+C처럼 받아 메타데이터를 쓰고 끝낸다. 그래도 10초 안에 안 끝나면 SIGKILL
+TimeoutStopSec=10s
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target

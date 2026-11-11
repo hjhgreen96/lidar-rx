@@ -1,0 +1,23 @@
+# 수신 스레드의 메모리 시스템 호출 (strace -p <수신 스레드> -e trace=memory, 보내는 중)
+
+## 1단계 (프레임 점 배열만 재사용): 10 s 동안
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 67.95    0.015377          79       193           munmap
+ 32.05    0.007254          37       193           mmap2
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.022631          58       386           total
+
+## 1단계: 크기 (1.5 s 일부). 16 KB 약 68 ms마다(약 51패킷), 4 KB 약 204 ms마다. 0.7 MB 점 배열은 더 없음
+05:23:04.819273 munmap(0xb6ba9000, 4096) = 0
+05:23:04.820473 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6ba9000
+05:23:04.856264 munmap(0xb6ba5000, 16384) = 0
+05:23:04.857535 mmap2(NULL, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6ba5000
+05:23:04.926913 munmap(0xb6ba5000, 16384) = 0
+05:23:04.928180 mmap2(NULL, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6ba5000
+05:23:04.994370 munmap(0xb6ba5000, 16384) = 0
+05:23:04.995625 mmap2(NULL, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6ba5000
+05:23:05.023525 munmap(0xb6ba9000, 4096) = 0
+05:23:05.024473 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6ba9000
+
+## 2단계 (패킷마다의 배열도 재사용): 10 s 동안 0번 (strace -c가 아무것도 찍지 않음)

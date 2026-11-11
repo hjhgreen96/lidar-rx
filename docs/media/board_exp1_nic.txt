@@ -1,0 +1,7 @@
+rcvbuf 4096: rx_frames 7098 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7105 softnet_processed 7102 softnet_dropped 0 softnet_squeeze 0
+rcvbuf 16384: rx_frames 7099 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7110 softnet_processed 7259 softnet_dropped 0 softnet_squeeze 0
+rcvbuf 65536: rx_frames 7103 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7121 softnet_processed 7103 softnet_dropped 0 softnet_squeeze 0
+rcvbuf 131072: rx_frames 7097 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7110 softnet_processed 7257 softnet_dropped 0 softnet_squeeze 0
+rcvbuf 262144: rx_frames 7099 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7097 softnet_processed 7099 softnet_dropped 0 softnet_squeeze 0
+rcvbuf 524288: rx_frames 7104 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7129 softnet_processed 7104 softnet_dropped 0 softnet_squeeze 0
+rcvbuf 1048576: rx_frames 7100 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7101 softnet_processed 7260 softnet_dropped 0 softnet_squeeze 0

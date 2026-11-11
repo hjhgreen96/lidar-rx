@@ -1,0 +1,5 @@
+step,description,wait_p50_us,wait_p99_us,wait_max_us
+0,first run on the board,127,7168,18844
+1,clock refit moved to the stage thread,129,6208,7182
+2,frame assembly without copies,123,1104,1654
+3,point-time shift to the stage + decoder without per-point trig,123,273,663

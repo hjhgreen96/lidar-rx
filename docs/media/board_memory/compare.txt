@@ -1,0 +1,33 @@
+# 수신 스레드 메모리: 배열 재사용 전/후 (보드 Arty Z7-20, 2026-11-11)
+# 조건마다 서비스 재시작 → Windows pcap-replay 세 바퀴(28 s, 21,279 패킷) → 그동안의 수신 스레드 폴트·CPU, 상태 줄 wait-p99 최대
+# old = 재사용 전 바이너리, new = 재사용 후. current = mlockall(MCL_CURRENT), future = MCL_CURRENT|MCL_FUTURE, none = 고정 안 함
+# 측정 스크립트는 저장소에 넣지 않음 (보드의 바이너리를 바꿔 끼우며 잼). 순서를 섞어 두 번씩
+
+## 1단계: 프레임 점 배열(약 0.7 MB)만 돌려받아 다시 씀
+old-current  wait-p99 max  311 us | rx thread minflt  48504 majflt 0 cpu 20.8% | VmLck: 4952 VmRSS: 5448
+new-current  wait-p99 max  298 us | rx thread minflt   3406 majflt 0 cpu 18.2% | VmLck: 4964 VmRSS: 6636
+new-future   wait-p99 max  338 us | rx thread minflt   2823 majflt 0 cpu 18.1% | VmLck: 7700 VmRSS: 7396
+new-none     wait-p99 max  306 us | rx thread minflt   3403 majflt 0 cpu 18.1% | VmLck: 0 VmRSS: 2328
+new-future   wait-p99 max  347 us | rx thread minflt   2823 majflt 0 cpu 18.2% | VmLck: 7700 VmRSS: 7396
+new-current  wait-p99 max  299 us | rx thread minflt   3404 majflt 0 cpu 18.1% | VmLck: 4964 VmRSS: 6632
+old-current  wait-p99 max  294 us | rx thread minflt  48505 majflt 0 cpu 20.8% | VmLck: 4952 VmRSS: 5448
+# 남은 폴트: 초당 약 83번 계속 (fault_series.txt). 수신 스레드가 16 KB·4 KB mmap/munmap을 10 s에 193쌍 (rt_mmap_trace.txt)
+#   = 패킷마다 받고 놓는 작은 배열 둘(해석한 포인트 384개 자리, 페이로드 1,206 B)을 musl이 그룹째 돌려줬다 다시 받음
+
+## 2단계: 패킷마다의 배열 둘도 다시 씀 (해석기의 포인트 배열, UDP 출처의 페이로드)
+old-current  wait-p99 max  368 us | rx thread minflt  48504 majflt 0 cpu 20.6% | VmLck: 4952 VmRSS: 5448
+new-current  wait-p99 max  277 us | rx thread minflt    396 majflt 0 cpu 17.1% | VmLck: 4964 VmRSS: 6644
+new-future   wait-p99 max  281 us | rx thread minflt    556 majflt 0 cpu 17.1% | VmLck: 7700 VmRSS: 7300
+new-none     wait-p99 max  274 us | rx thread minflt    401 majflt 0 cpu 17.3% | VmLck: 0 VmRSS: 2336
+new-future   wait-p99 max  274 us | rx thread minflt    556 majflt 0 cpu 17.1% | VmLck: 7700 VmRSS: 7300
+new-current  wait-p99 max  273 us | rx thread minflt    396 majflt 0 cpu 17.2% | VmLck: 4964 VmRSS: 6644
+old-current  wait-p99 max  303 us | rx thread minflt  48505 majflt 0 cpu 20.7% | VmLck: 4952 VmRSS: 5448
+# 남은 폴트 약 400은 모두 시작 직후 (첫 프레임들의 배열이 자람). 그 뒤는 초당 0 (fault_series.txt), 메모리 시스템 호출 0
+
+## 최종 (설치한 것: 2단계 + MCL_CURRENT|MCL_FUTURE)
+final        wait-p99 max  281 us | rx thread minflt    556 majflt 0 cpu 17.4% | VmLck: 7700 VmRSS: 7300
+decoder: 21279 packets, 286 frames, malformed 0, product-id mismatches 21279, missing 0, reordered 0, restarts 0, new point arrays 1
+receive thread: SCHED_FIFO priority 50, CPUs 1, memory locked 4976 kB (read back from the kernel)
+
+## 참고: 재사용 전 MCL_FUTURE (docs/runs/5-board.md 11절 표)
+mlockall(MCL_CURRENT|MCL_FUTURE)  wait-p99 2,032, 2,048 us | rx thread minflt 71,799 | 6.4 MB

@@ -1,0 +1,24 @@
+[workspace]
+# resolver 3: 의존성 버전을 고를 때 아래 rust-version을 지키는 버전을 고른다
+# (r2r이 끌어오는 uuid 최신판이 rustc 1.89를 요구해, 1.85 툴체인에서 빌드가 멈췄던 것을 막음)
+resolver = "3"
+members = [
+    "crates/lidar-core",
+    "crates/vlp16",
+    "crates/lidar-io",
+    "crates/clock",
+    "crates/pcap-replay",
+    "crates/rx",
+]
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+license = "MIT"
+rust-version = "1.85"
+
+[workspace.dependencies]
+lidar-core = { path = "crates/lidar-core" }
+vlp16 = { path = "crates/vlp16" }
+lidar-io = { path = "crates/lidar-io" }
+clock = { path = "crates/clock" }

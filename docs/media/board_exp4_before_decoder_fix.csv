@@ -1,0 +1,7 @@
+load,policy,wait_p50_us,wait_p99_us,wait_max_us,missing_packets,kernel_drops
+none,other,69,993,7182,0,0
+none,fifo,67,900,1159,0,0
+same,other,81920,116736,123547,453,453
+same,fifo,83,951,1872,0,0
+other,other,75,1840,9753,0,0
+other,fifo,74,936,1261,0,0

@@ -1,0 +1,14 @@
+[package]
+name = "lidar-io"
+description = "입력 출처 구현: pcap 파일 읽기, Ethernet/IPv4/UDP 헤더 해석, PacketSource 어댑터"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+lidar-core.workspace = true
+
+# 실시간 UDP 수신(udp.rs)의 recvmsg·setsockopt·poll. 리눅스에서만 빌드한다.
+[target.'cfg(target_os = "linux")'.dependencies]
+libc = "0.2"

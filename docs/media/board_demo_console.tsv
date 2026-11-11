@@ -1,0 +1,37 @@
+-8.00	cmd	ssh xilinx@192.168.2.99 journalctl -u lidar-rx -f -o cat      # Arty Z7-20 board: lidar-rx systemd service
+-7.41	out	lidar-rx: systemd watchdog: notifying every 1s
+-7.41	out	lidar-rx: listening on 0.0.0.0:2368, socket receive buffer 2097152 B (requested Some(1048576))
+-7.41	out	lidar-rx: forwarding every received packet to 192.168.2.1:2369
+-7.40	out	lidar-rx: receive thread: SCHED_FIFO priority 50, CPUs 1 (read back from the kernel)
+-7.40	out	Started lidar-rx: VLP-16 LiDAR receiver.
+-6.65	out	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+-4.65	out	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+-2.65	out	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+-0.65	out	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 | clock (collecting) | queue-drops stage 0 stats 0
+0.00	cmd	pcap-replay.exe vlp16.pcap --to 192.168.2.99:2368 --pace sensor --loops 2      # Windows PC -> board over Ethernet
+1.35	out	rx: 312 pkt/s 4.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 281 us | clock (collecting) | queue-drops stage 0 stats 0
+3.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -0.93 ppm (lsq +0.34) p99 52 us | queue-drops stage 0 stats 0
+5.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -1.14 ppm (lsq -0.98) p99 49 us | queue-drops stage 0 stats 0
+7.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 275 us | clock -1.14 ppm (lsq -0.82) p99 52 us | queue-drops stage 0 stats 0
+9.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 273 us | clock -0.93 ppm (lsq -0.90) p99 50 us | queue-drops stage 0 stats 0
+11.35	out	rx: 754 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 273 us | clock -1.08 ppm (lsq -0.97) p99 50 us | queue-drops stage 0 stats 0
+13.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.08 ppm (lsq -0.83) p99 53 us | queue-drops stage 0 stats 0
+15.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.08 ppm (lsq -0.88) p99 54 us | queue-drops stage 0 stats 0
+17.35	out	rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.08 ppm (lsq -0.91) p99 54 us | queue-drops stage 0 stats 0
+19.85	out	rx: 602 pkt/s 8.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.08 ppm (lsq -0.95) p99 53 us | queue-drops stage 0 stats 0
+21.60	out	rx: 0 pkt/s 0.0 frm/s (sensor quiet) | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.08 ppm (lsq -0.95) p99 53 us | queue-drops stage 0 stats 0
+22.06	cmd	ssh xilinx@192.168.2.99 sudo systemctl stop lidar-rx
+23.10	out	lidar-rx: stopped by signal
+23.10	out	--- summary
+23.10	out	receive thread: SCHED_FIFO priority 50, CPUs 1 (read back from the kernel)
+23.10	out	decoder: 14186 packets, 191 frames, malformed 0, product-id mismatches 14186, missing 0, reordered 0, restarts 0
+23.10	out	socket: kernel drops (SO_RXQ_OVFL) 0
+23.10	out	queue wait (kernel receive → read here): p50 124 us, p99 274 us, max 680 us over 14186 packets; max at 1794341116.794080 s
+23.11	out	kernel module (IP layer, /proc/lidar_mon): seen 14186, lost 0, reordered 0, restarts 1; seen − received here = 0
+23.11	out	clock: skew -1.084 ppm (least squares -0.951), least squares sits 13.6 us above the envelope; residual above envelope p50 9.5 us, p99 53.4 us, max 355.2 us; 13573 samples over 18.01 s; resets 0
+23.11	out	consumer stats: queue drops 0; 191 frames (189 full turns, 26921 points each), missing packets 0; frame age at consumer p50 2464 us, p99 8576 us, max 10296 us
+23.11	out	forward: 14186 packets to 192.168.2.1:2369, 0 failed
+23.11	out	Stopping lidar-rx: VLP-16 LiDAR receiver...
+23.11	out	lidar-rx.service: Deactivated successfully.
+23.11	out	Stopped lidar-rx: VLP-16 LiDAR receiver.
+23.11	out	lidar-rx.service: Consumed 4.498s CPU time.

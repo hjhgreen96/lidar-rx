@@ -1,0 +1,12 @@
+[package]
+name = "pcap-replay"
+description = "pcap에 녹화된 LiDAR 패킷을 원래 간격(또는 정해진 드리프트)대로 UDP로 다시 보낸다"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+lidar-core.workspace = true
+lidar-io.workspace = true
+vlp16.workspace = true

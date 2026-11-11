@@ -1,0 +1,27 @@
+[package]
+name = "rx"
+description = "LiDAR 수신 프로그램: 입력 출처 + 해석기 + 시계 추정 + 소비자(통계, ROS 2)를 조립해 돌린다"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "lidar-rx"
+path = "src/main.rs"
+
+[features]
+# ROS 2 발행. 빌드할 때 ROS 2 환경(source /opt/ros/humble/setup.bash)과 libclang이 필요하고,
+# 실행 파일이 ROS 2 공유 라이브러리에 동적 링크된다 → 보드용 정적 빌드와 CI에서는 끈다.
+ros2 = ["dep:r2r"]
+
+[dependencies]
+lidar-core.workspace = true
+lidar-io.workspace = true
+vlp16.workspace = true
+clock.workspace = true
+r2r = { version = "0.9", optional = true }
+
+# 수신 스레드의 CPU 고정·실시간 정책(sched.rs, 실험 4). 리눅스에서만.
+[target.'cfg(target_os = "linux")'.dependencies]
+libc = "0.2"

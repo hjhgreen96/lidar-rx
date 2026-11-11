@@ -1,0 +1,6 @@
+none other: rx_frames 7096 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7105 softnet_processed 7256 softnet_dropped 0 softnet_squeeze 0
+none fifo: rx_frames 7098 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7107 softnet_processed 7098 softnet_dropped 0 softnet_squeeze 0
+same other: rx_frames 7103 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7128 softnet_processed 7105 softnet_dropped 0 softnet_squeeze 0
+same fifo: rx_frames 7103 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7126 softnet_processed 7103 softnet_dropped 0 softnet_squeeze 0
+other other: rx_frames 7106 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7127 softnet_processed 7106 softnet_dropped 0 softnet_squeeze 0
+other fifo: rx_frames 7105 rx_resource_errors 0 rx_overruns 0 q0_rx_dropped 0 eth0_irqs 7126 softnet_processed 7266 softnet_dropped 0 softnet_squeeze 0

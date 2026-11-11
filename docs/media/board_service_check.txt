@@ -1,0 +1,49 @@
+== 2026-11-11 04:40:21 service check on xilinx@192.168.2.99, 10 min
+== 1. long run: every 30 s
+  30s  pid 11783 rss 1628 kB cpu 7.40 s restarts 0 seen 363657 | rx: 754 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 275 us | clock -1.00 ppm (lsq -0.89) p99 51 us | queue-drops stage 0 stats 0
+  61s  pid 11783 rss 1812 kB cpu 15.03 s restarts 0 seen 386961 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.04 ppm (lsq -1.10) p99 49 us | queue-drops stage 0 stats 0
+  92s  pid 11783 rss 1936 kB cpu 22.67 s restarts 0 seen 410291 | rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.09 ppm (lsq -2.99) p99 56 us | queue-drops stage 0 stats 0
+ 123s  pid 11783 rss 1692 kB cpu 30.31 s restarts 0 seen 433606 | rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 273 us | clock -1.05 ppm (lsq -1.09) p99 51 us | queue-drops stage 0 stats 0
+ 154s  pid 11783 rss 1820 kB cpu 37.95 s restarts 0 seen 456914 | rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 273 us | clock -1.02 ppm (lsq -1.06) p99 49 us | queue-drops stage 0 stats 0
+ 185s  pid 11783 rss 1384 kB cpu 45.60 s restarts 0 seen 480253 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 273 us | clock -1.07 ppm (lsq -1.17) p99 55 us | queue-drops stage 0 stats 0
+ 215s  pid 11783 rss 1452 kB cpu 53.26 s restarts 0 seen 503571 | rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 273 us | clock -1.06 ppm (lsq -1.07) p99 50 us | queue-drops stage 0 stats 0
+ 246s  pid 11783 rss 1252 kB cpu 60.91 s restarts 0 seen 526892 | rx: 753 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.06 ppm (lsq -1.80) p99 58 us | queue-drops stage 0 stats 0
+ 277s  pid 11783 rss 1576 kB cpu 68.54 s restarts 0 seen 550226 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.06 ppm (lsq -1.19) p99 54 us | queue-drops stage 0 stats 0
+ 308s  pid 11783 rss 1692 kB cpu 76.19 s restarts 0 seen 573550 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.08 ppm (lsq -1.21) p99 54 us | queue-drops stage 0 stats 0
+ 339s  pid 11783 rss 1620 kB cpu 83.83 s restarts 0 seen 596873 | rx: 754 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.06 ppm (lsq -1.04) p99 49 us | queue-drops stage 0 stats 0
+ 370s  pid 11783 rss 1736 kB cpu 91.48 s restarts 0 seen 620193 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.02 ppm (lsq +0.56) p99 57 us | queue-drops stage 0 stats 0
+ 401s  pid 11783 rss 1908 kB cpu 99.12 s restarts 0 seen 643534 | rx: 753 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.02 ppm (lsq -1.08) p99 49 us | queue-drops stage 0 stats 0
+ 432s  pid 11783 rss 1304 kB cpu 106.88 s restarts 0 seen 666880 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 274 us | clock -1.00 ppm (lsq -1.25) p99 56 us | queue-drops stage 0 stats 0
+ 463s  pid 11783 rss 1476 kB cpu 114.52 s restarts 0 seen 690197 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 275 us | clock -1.03 ppm (lsq -1.07) p99 45 us | queue-drops stage 0 stats 0
+ 494s  pid 11783 rss 1504 kB cpu 122.17 s restarts 0 seen 713516 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 275 us | clock -1.00 ppm (lsq -5.89) p99 58 us | queue-drops stage 0 stats 0
+ 525s  pid 11783 rss 1648 kB cpu 129.87 s restarts 0 seen 736835 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 275 us | clock -1.11 ppm (lsq -0.02) p99 61 us | queue-drops stage 0 stats 0
+ 556s  pid 11783 rss 1592 kB cpu 137.94 s restarts 0 seen 760333 | rx: 753 pkt/s 10.5 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -1.12 ppm (lsq -0.09) p99 108 us | queue-drops stage 0 stats 0
+ 587s  pid 11783 rss 1392 kB cpu 145.67 s restarts 0 seen 783680 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -1.02 ppm (lsq -1.16) p99 49 us | queue-drops stage 0 stats 0
+ 618s  pid 11783 rss 1568 kB cpu 153.36 s restarts 0 seen 806998 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 276 us | clock -0.98 ppm (lsq -1.04) p99 51 us | queue-drops stage 0 stats 0
+== 2. SIGSTOP (loop frozen: watchdog should abort and restart it)
+lidar-rx.service: Sent signal SIGSTOP to main process 11783 (lidar-rx) on client request.
+lidar-rx.service: Watchdog timeout (limit 2s)!
+lidar-rx.service: Killing process 11783 (lidar-rx) with signal SIGABRT.
+lidar-rx.service: Main process exited, code=killed, status=6/ABRT
+lidar-rx.service: Failed with result 'watchdog'.
+lidar-rx.service: Consumed 2min 33.893s CPU time.
+lidar-rx.service: Scheduled restart job, restart counter is at 1.
+Stopped lidar-rx: VLP-16 LiDAR receiver.
+lidar-rx.service: Consumed 2min 33.893s CPU time.
+Starting lidar-rx: VLP-16 LiDAR receiver...
+lidar-rx: systemd watchdog: notifying every 1s
+lidar-rx: listening on 0.0.0.0:2368, socket receive buffer 2097152 B (requested Some(1048576))
+after: pid 13489 rss 996 kB cpu 1.38 s restarts 1 seen 815534 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 277 us | clock -0.87 ppm (lsq -0.81) p99 42 us | queue-drops stage 0 stats 0
+after +4 s: pid 13489 rss 1344 kB cpu 2.61 s restarts 1 seen 819268 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 281 us | clock -1.00 ppm (lsq -0.06) p99 56 us | queue-drops stage 0 stats 0
+== 3. SIGKILL (process dies: Restart=on-failure)
+lidar-rx.service: Sent signal SIGKILL to main process 13489 (lidar-rx) on client request.
+lidar-rx.service: Sending signal SIGKILL to process 13491 (stage) on client request.
+lidar-rx.service: Main process exited, code=killed, status=9/KILL
+lidar-rx.service: Failed with result 'signal'.
+lidar-rx.service: Consumed 3.165s CPU time.
+lidar-rx.service: Scheduled restart job, restart counter is at 2.
+Stopped lidar-rx: VLP-16 LiDAR receiver.
+lidar-rx.service: Consumed 3.165s CPU time.
+after: pid 13649 rss 960 kB cpu 1.50 s restarts 2 seen 825715 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 296 us | clock -0.99 ppm (lsq -0.15) p99 50 us | queue-drops stage 0 stats 0
+after +4 s: pid 13649 rss 1064 kB cpu 2.69 s restarts 2 seen 829425 | rx: 754 pkt/s 10.0 frm/s | missing 0 reorder 0 restart 0 kernel-drops 0 wait-p99 282 us | clock -0.99 ppm (lsq -1.03) p99 56 us | queue-drops stage 0 stats 0
+saved: docs/media/board_service_check.txt
